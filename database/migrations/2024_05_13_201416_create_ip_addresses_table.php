@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('ip_addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('isPasswordKeptAsHMac');
-            $table->string('salt');
-            $table->rememberToken();
+            $table->integer('okLoginNum');
+            $table->integer('badLoginNum');
+            $table->integer('lastBadLoginNum');
+            $table->boolean('permanentLock');
+            $table->date('tempLock');
+            $table->string('addressIP');
+            $table->foreignId('id_user');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('ip_addresses');
     }
 };
