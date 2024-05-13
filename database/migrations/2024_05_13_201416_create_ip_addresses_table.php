@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shared_passwords', function (Blueprint $table) {
+        Schema::create('ip_addresses', function (Blueprint $table) {
             $table->id();
-            $table->boolean('valid');
-            $table->foreignId('id_owner');
-            $table->foreignId('id_receiver');
-            $table->foreignId('id_password');
+            $table->integer('okLoginNum');
+            $table->integer('badLoginNum');
+            $table->integer('lastBadLoginNum');
+            $table->boolean('permanentLock');
+            $table->date('tempLock');
+            $table->string('addressIP');
+            $table->foreignId('id_user');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shared_passwords');
+        Schema::dropIfExists('ip_addresses');
     }
 };

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('login');
             $table->longText('description');
-            $table->foreign('website_id')->references('id')->on('websites');
+            $table->foreignId('website_id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

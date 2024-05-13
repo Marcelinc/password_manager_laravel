@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('login_attempts', function (Blueprint $table) {
             $table->id();
-            $table->boolval('successful');
+            $table->boolean('successful');
             $table->string('device');
             $table->string('session');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreignId('id_user');
             $table->timestamps();
         });
     }
