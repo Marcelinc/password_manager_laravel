@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         //Seeders
-        //\App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -37,13 +37,15 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         
-        /*foreach($website_list as $website){
+        foreach($website_list as $website){
             Website::create([
                 "name" => $website['name'],
                 "url" => $website['url']
             ]);
-        }*/
+        }
 
         \App\Models\Password::factory(10)->create();
+
+
     }
 }
