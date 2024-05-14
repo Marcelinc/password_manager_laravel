@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('device');
             $table->string('session');
             $table->foreignId('id_user');
+            $table->foreignId('id_address');
             $table->timestamps();
         });
     }
