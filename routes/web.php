@@ -48,6 +48,22 @@ Route::get('/dashboard',function(){
                     'name' => 'Instagram'
                 ] 
             ]
-        ]
+        ],
+    ]);
+});
+
+Route::get('/dashboard/security',function(){
+    return view('dashboard',[
+        "login" => "User1",
+        "isHmac" => true,
+        'passwordCount' => 2
+    ]);
+});
+
+Route::get('/dashboard/sharedPasswords',function(){
+    return view('dashboard',[
+        "login" => "User1",
+        "isHmac" => true,
+        'passwordCount' => 2
     ]);
 });
