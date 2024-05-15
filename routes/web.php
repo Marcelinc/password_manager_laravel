@@ -23,3 +23,31 @@ Route::get('/register', function (Request $request) {
         'type' => $request->type
     ]);
 });
+
+Route::get('/login',function (){
+    return view('login');
+});
+
+Route::get('/dashboard',function(){
+    return view('dashboard',[
+        "login" => "User1",
+        "isHmac" => true,
+        "passwords" => [
+            [
+                "id" => 1,
+                "password" => "123",
+                "website" => [
+                    'id' => 1,
+                    'name' => 'Youtube'
+                ]
+            ],[
+                "id" => 2,
+                "password" => "abc",
+                "website" => [
+                    'id' => 2,
+                    'name' => 'Instagram'
+                ] 
+            ]
+        ]
+    ]);
+});

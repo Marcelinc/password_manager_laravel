@@ -4,7 +4,7 @@
     <main class="formPage">
         <div class="form-container">
             <h1>Create an account</h1>
-            <div class="form">
+            <form class="form">
                 <label class="formElem">
                     <p>Login</p>
                     <input type='text' name="login"/>
@@ -24,10 +24,10 @@
                     </label>
                 </div>
                 <div class="formElem">
-                    <button class="submit">Register</button>
+                    <input type="submit" class="submit" value="Register"/>
                 </div>
                 <p class="appMessage"></p>
-            </div>
+            </form>
         </div>
     </main>
 @endsection

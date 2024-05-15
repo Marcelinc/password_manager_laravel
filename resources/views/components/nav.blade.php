@@ -7,7 +7,7 @@
     @else
         <a href="/">PasswordWallet</a>
         <div class="authLinks">
-            <a href="#">Log in</a>
+            <a href="/login">Log in</a>
             <a href="/register">Register</a>
         </div>
     @endif
