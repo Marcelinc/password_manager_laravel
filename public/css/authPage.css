@@ -1,0 +1,26 @@
+/*Stylesheets for login and register pages*/
+
+.formPage {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    min-height: calc(100vh - 50px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+.form-container{
+    border-radius: 1em;
+}
+.formRadio{
+    display: flex;
+    justify-content: space-around;
+}
+
+  /*Login form*/
+  .loginForm{
+    background-image: linear-gradient(to top right,#b1c45c,#5899c4);
+    padding-top: 70px;
+    padding-bottom: 60px;
+    min-height: 450px;
+  }

@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#root{
+    min-width: 300px;
+    min-height: 100vh;
+    background-color: #bdd1e3;
+}
+.container{
+    min-height: 100vh;
+    min-width: 300px;
+    color: azure;
+  }
+.content{
+    margin: auto;
+}
+.app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.appMessage{
+    color:rgb(66, 8, 8);
+    padding: 1em;
+    text-align: center;
+}
+
+@media screen and (min-width: 1650px) {
+    .content{
+        max-width: 1500px;
+    }
+}
