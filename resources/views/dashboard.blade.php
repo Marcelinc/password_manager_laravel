@@ -36,6 +36,14 @@
                     </a>
                   </div>
             </section>
+
+            @if($content === "passwords")
+              <x-password-section :passwords="$passwords"/>
+            @elseif($content === "security")
+              <x-security-section :attempts="$attempts"/>
+            @elseif($content === "sharedPasswords")
+              <x-shared-password-section :passwords="$passwords"/>
+            @endif
         </main>
     </div>
 @endsection

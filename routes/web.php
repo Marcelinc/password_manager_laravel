@@ -30,12 +30,14 @@ Route::get('/login',function (){
 
 Route::get('/dashboard',function(){
     return view('dashboard',[
+        "content" => "passwords",
         "login" => "User1",
         "isHmac" => true,
         "passwords" => [
             [
                 "id" => 1,
                 "password" => "123",
+                "login" => "User",
                 "website" => [
                     'id' => 1,
                     'name' => 'Youtube'
@@ -54,16 +56,46 @@ Route::get('/dashboard',function(){
 
 Route::get('/dashboard/security',function(){
     return view('dashboard',[
+        "content" => "security",
         "login" => "User1",
         "isHmac" => true,
-        'passwordCount' => 2
+        'passwordCount' => 2,
+        "attempts" => [
+            [
+                "successful" => true,
+                "device" => "Windows 10",
+                "ip_address" => [
+                    "address" => "127.0.0.1"
+                ],
+                "date" => "17-04-2024 12:30"
+            ]
+        ]
     ]);
 });
 
 Route::get('/dashboard/sharedPasswords',function(){
     return view('dashboard',[
+        "content" => "sharedPasswords",
         "login" => "User1",
         "isHmac" => true,
-        'passwordCount' => 2
+        'passwordCount' => 2,
+        "passwords" => [
+            [
+                "id" => 1,
+                "valid" => true,
+                "owner" => [
+                    "id" => 1,
+                    "login" => "User1"
+                ],
+                "password" => [
+                    "id" => 3,
+                    "value" => "password",
+                    "login" => "User12",
+                    "website" => [
+                        "name" => "Youtube",
+                    ]
+                ]
+            ]
+        ]
     ]);
 });

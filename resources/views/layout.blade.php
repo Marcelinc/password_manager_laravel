@@ -13,6 +13,7 @@
     <link href="{{ asset('css/authPage.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mode-selector.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/password.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">

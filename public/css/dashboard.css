@@ -67,6 +67,7 @@
     width: 80vw;
     min-width: 300px;
     max-width: 1000px;
+    color: #3a3c7f;
 }
 .attempt {
     padding: 10px;
@@ -75,6 +76,7 @@
     font-size: min(max(15px,3vw),25px);
     cursor: default;
     position: relative;
+    background-color: #d1c2b6;
 }
 .expandAttempt{
     position: absolute;
