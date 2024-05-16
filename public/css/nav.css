@@ -1,0 +1,28 @@
+nav {
+    background-color: #2f404f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+  }
+  nav a{
+    text-decoration: none;
+    color: antiquewhite;
+    font-weight: 500;
+    font-size: min(max(16px,5vw),22px);
+  }
+  nav a:hover{
+    opacity: .8;
+  }
+  #logout{
+    position: absolute;
+    right: 5vw;
+  }
+
+  .authLinks{
+    display: flex;
+    justify-content: space-between;
+  }
+  .authLinks a{
+    margin-inline: 1em;
+  }

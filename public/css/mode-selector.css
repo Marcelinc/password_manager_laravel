@@ -1,0 +1,37 @@
+.modeSelector-container{
+    background-color: rgb(44, 168, 117);
+    border-radius: 1em;
+    position: relative;
+    width: fit-content;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-block: 1em;
+}
+
+.mode-span{
+    font-size: 1.6em;
+    transition: .4s;
+    background-color: rgb(63, 113, 126);
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: rgb(160, 134, 19);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 4px;
+}
+.mode-text{
+    padding: .5em 1em;
+}
+
+.mode-input:checked + .mode-span{
+    transform: translateX(34px);
+}
+
+.mode-input{
+    display: none;
+}

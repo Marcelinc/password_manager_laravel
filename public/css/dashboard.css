@@ -1,0 +1,120 @@
+/*UserDash section*/
+.eventTag{
+    color: rgb(158, 160, 22);
+    background-color: #3a3c7f;
+    width: fit-content;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: min(max(4vw,16px),40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: 1em;
+    margin-block: .5em;
+    transition: color .5s ease-in, transform .5s ease-in;
+}
+.eventTag:hover{
+    cursor: pointer;
+    color: rgb(204, 207, 26);
+    transform: scale(1.5);
+}
+.eventTag > svg{
+    width: 1em;
+}
+.userInfo{
+    background-color:rgb(45, 45, 117);
+    color: azure;
+    padding: 15px;
+    border-bottom: 1px solid rgb(32, 82, 57);
+}
+.password-operations{
+    background-color:rgb(45, 45, 117);
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*Passwords section*/
+.passwords{
+    
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+}
+.passwords h2{
+    font-size: min(max(16px,5vw),32px);
+    padding-bottom: 20px;
+}
+.password-list{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px 20px;
+}
+
+
+
+/*Login attempts list*/
+.successLogin{
+    color:rgb(117, 172, 35);
+}
+.failedLogin{
+    color:red;
+}
+.attempt-list {
+    width: 80vw;
+    min-width: 300px;
+    max-width: 1000px;
+    color: #3a3c7f;
+}
+.attempt {
+    padding: 10px;
+    border: 3px solid #7d624e;
+    margin: 3px;
+    font-size: min(max(15px,3vw),25px);
+    cursor: default;
+    position: relative;
+    background-color: #d1c2b6;
+}
+.expandAttempt{
+    position: absolute;
+    top: 14px;
+    right: 10px;
+}
+.expandAttempt:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+.attempt-details{
+    opacity: 0;
+    max-height: 0;
+    transition: opacity .5s ease, max-height .7s ease;
+    overflow: hidden;
+}
+.attempt-details.active{
+    opacity: 1;
+    max-height: 200px;
+}
+
+/*Shared passwords*/
+.sharedPassword{
+    color:rgb(62, 116, 9);
+}
+.sharedOwner{
+    color:crimson;
+}
+
+/*Media queries*/
+
+@media screen and (min-width:1240px) {
+    .password-list{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 450px){
+    .eventTag{
+        margin-inline: .5em;
+    }
+}

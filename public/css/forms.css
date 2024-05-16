@@ -1,0 +1,44 @@
+label{
+    display: flex;
+    
+  }
+  button{
+    cursor: pointer;
+  }
+  
+  .form-container,.loginForm{
+    background-image: linear-gradient(to left,#c45c5c,#5858c4);
+    color: #eae7e2;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+  }
+  .formElem{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+  }
+  .submit {
+
+    height: 30px;
+    min-width: 100px;
+    width: 10vw;
+  }
+  .submit:hover{
+    cursor: pointer;
+  }
+  .formElem input, .formElem select {
+    width: 30vw;
+    max-width: 300px;
+    min-width: 120px;
+    padding: 5px;
+    outline: none;
+    margin: 15px;
+  }
+
+.disabledBttn{
+  cursor: not-allowed !important;
+  transform: none !important;
+  opacity: .5;
+}
