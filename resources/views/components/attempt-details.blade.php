@@ -7,12 +7,12 @@
         @else 
             <span class="failedLogin">Failed</span>
         @endif
-        login attempt {{$attempt['date']}}
+        login attempt {{$attempt->created_at}}
     </p>
     <!--<div class={"attempt-details "+ (showDetails ? 'active' : '')}>-->
     <div class="attempt-details active">
-        <p>Adres IP: {{$attempt['ip_address']["address"]}}</p>
-        <p>Urządzenie: {{$attempt['device']}}</p>
+        <p>Adres IP: {{$attempt->ip_address}}</p>
+        <p>Urządzenie: {{$attempt->device}}</p>
     </div>
     <!--{showDetails ? <FaCaretSquareDown class="expandAttempt" onClick={() => setShowDetails(!showDetails)}/> :
     <FaCaretSquareUp class="expandAttempt" onClick={() => setShowDetails(!showDetails)}/>}-->

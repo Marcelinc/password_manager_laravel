@@ -1,11 +1,11 @@
 @props(['password'])
 
 <div class="password">
-    <h2>Website: {{$password['website']['name']}}</h2>
+    <h2>Website: {{$password->website}}</h2>
     <p class='website-info'>
-      Login: {{isset($password['login']) ? $password['login'] : 'Not set'}}
+      Login: {{isset($password->login) ? $password->login : 'Not set'}}
       <span class='password-field'>
-        Password: <!--{decrypted ? decrypted : data.password}--> {{$password['password']}} 
+        Password: <!--{decrypted ? decrypted : data.password}--> {{$password->password}} 
       </span>
     </p>
     <!--{decrypted ? <button onClick={() => setDecrypted('')}>Hide</button> : <button class='showPassword' onClick={show} disabled={modeContext.mode === 'Read'}>Show</button>}
