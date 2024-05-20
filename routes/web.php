@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\LoginAttemptController;
+use App\Http\Controllers\SharedPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,74 +31,8 @@ Route::get('/login',function (){
     return view('login');
 });
 
-Route::get('/dashboard',function(){
-    return view('dashboard',[
-        "content" => "passwords",
-        "login" => "User1",
-        "isHmac" => true,
-        "passwords" => [
-            [
-                "id" => 1,
-                "password" => "123",
-                "login" => "User",
-                "website" => [
-                    'id' => 1,
-                    'name' => 'Youtube'
-                ]
-            ],[
-                "id" => 2,
-                "password" => "abc",
-                "website" => [
-                    'id' => 2,
-                    'name' => 'Instagram'
-                ] 
-            ]
-        ],
-    ]);
-});
+Route::get('/dashboard',[PasswordController::class,'index']);
 
-Route::get('/dashboard/security',function(){
-    return view('dashboard',[
-        "content" => "security",
-        "login" => "User1",
-        "isHmac" => true,
-        'passwordCount' => 2,
-        "attempts" => [
-            [
-                "successful" => true,
-                "device" => "Windows 10",
-                "ip_address" => [
-                    "address" => "127.0.0.1"
-                ],
-                "date" => "17-04-2024 12:30"
-            ]
-        ]
-    ]);
-});
+Route::get('/dashboard/security',[LoginAttemptController::class,'index']);
 
-Route::get('/dashboard/sharedPasswords',function(){
-    return view('dashboard',[
-        "content" => "sharedPasswords",
-        "login" => "User1",
-        "isHmac" => true,
-        'passwordCount' => 2,
-        "passwords" => [
-            [
-                "id" => 1,
-                "valid" => true,
-                "owner" => [
-                    "id" => 1,
-                    "login" => "User1"
-                ],
-                "password" => [
-                    "id" => 3,
-                    "value" => "password",
-                    "login" => "User12",
-                    "website" => [
-                        "name" => "Youtube",
-                    ]
-                ]
-            ]
-        ]
-    ]);
-});
+Route::get('/dashboard/sharedPasswords',[SharedPasswordController::class,'index']);
