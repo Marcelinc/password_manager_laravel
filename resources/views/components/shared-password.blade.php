@@ -3,7 +3,7 @@
 <div class="password">
     <h2>Website: {{$password->website}}</h2>
     <p class='website-info'>
-      <span class="sharedOwner">Shared from: {{$password->name}}</span>
+      <span class="sharedOwner">Shared from: {{$password->username}}</span>
       Login: {{isset($password->login) ? $password->login : 'Not set'}}
       <span class="sharedPassword">
       Password: <!--{decrypted ? decrypted : data.sh.id_password.password}--> {{$password->password}}
