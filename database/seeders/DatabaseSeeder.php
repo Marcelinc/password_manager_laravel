@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         //Seeders
+        /**Users */
         \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -36,7 +37,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        
+        /**Websites */
         foreach($website_list as $website){
             Website::create([
                 "name" => $website['name'],
@@ -44,8 +45,42 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        /**Passwords */
         \App\Models\Password::factory(10)->create();
 
 
+        /**Shared passwords */
+        \App\Models\SharedPassword::factory()->create([
+            "valid" => 1,
+            "id_owner" => 1,
+            "id_receiver" => 2,
+            "id_password" => 3
+        ]);
+        \App\Models\SharedPassword::factory()->create([
+            "valid" => 1,
+            "id_owner" => 2,
+            "id_receiver" => 1,
+            "id_password" => 2
+        ]);
+
+        /**IpAddresses */
+        \App\Models\IpAddress::factory()->create([
+            "okLoginNum" => 1,
+            "badLoginNum" => 0,
+            "lastBadLoginNum" => 0,
+            "permanentLock" => 0,
+            "tempLock" => date("Y-m-d H:i:s"),
+            "addressIP" => "192.178.1.0",
+            "id_user" => 1
+        ]);
+
+        /**Login attempts */
+        \App\Models\LoginAttempt::factory()->create([
+            "successful" => 1,
+            "device" => "Windows 10",
+            "session" => "session",
+            "id_user" => 1,
+            "id_address" => 1
+        ]);
     }
 }
