@@ -18,6 +18,16 @@ nav {
     position: absolute;
     right: 5vw;
   }
+  #logout-button{
+    background: none;
+    border: none;
+    color: antiquewhite;
+    font-weight: 500;
+    font-size: min(max(16px,5vw),22px);
+  }
+  #logout-button:hover{
+    opacity: .8;
+  }
 
   .authLinks{
     display: flex;
