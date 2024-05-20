@@ -19,7 +19,7 @@ class SharedPasswordController extends Controller
         $sharedPasswords = SharedPassword::join('users','users.id', '=','shared_passwords.id_owner')
         ->join('passwords','passwords.id', '=','shared_passwords.id_password')
         ->join('websites','websites.id', '=','passwords.website_id')
-        ->where('id_receiver',2)->get(['shared_passwords.valid','shared_passwords.id_owner','users.name','shared_passwords.id_password','passwords.password','passwords.login','websites.name as website']);
+        ->where('id_receiver',2)->get(['shared_passwords.valid','shared_passwords.id_owner','users.username','shared_passwords.id_password','passwords.password','passwords.login','websites.name as website']);
 
         //dd($sharedPasswords);
 
