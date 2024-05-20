@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\LoginAttemptController;
 use App\Http\Controllers\SharedPasswordController;
@@ -21,15 +22,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', function (Request $request) {
-    return view('register',[
-        'type' => $request->type
-    ]);
-});
+//Show register page
+Route::get('/register', [UserController::class,'create']);
+
+//Create a new user
+Route::post('/create-user',[UserController::class,'store']);
+
+Route::post('/logout',[UserController::class,'logout']);
 
 Route::get('/login',function (){
     return view('login');
 });
+
 
 Route::get('/dashboard',[PasswordController::class,'index']);
 

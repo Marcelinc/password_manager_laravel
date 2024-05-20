@@ -10,14 +10,18 @@ class PasswordController extends Controller
 {
     //Get all user's passwords
     public function index(){
-        $passwords = Password::addSelect(['website' => Website::select('name')
-        ->whereColumn('id','passwords.website_id')])->where('user_id',10)->get();
-        //dd($passwords);
-        return view('dashboard',[
-            "content" => "passwords",
-            "login" => "User1",
-            "isHmac" => true,
-            "passwords" => $passwords
-        ]);
+        if(auth()->check()){
+            //User logged in
+            $passwords = Password::addSelect(['website' => Website::select('name')
+            ->whereColumn('id','passwords.website_id')])->where('user_id',auth()->user()->id)->get();
+            //dd($passwords);
+            return view('dashboard',[
+                "content" => "passwords",
+                "passwords" => $passwords
+            ]);
+        } else{
+            //User not logged in
+            return redirect('login');
+        }
     }
 }

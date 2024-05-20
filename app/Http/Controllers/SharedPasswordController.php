@@ -11,24 +11,23 @@ class SharedPasswordController extends Controller
 {
     //Get all shared passwords
     public function index(){
+        if(auth()->check()){
+            //User logged in
+            $sharedPasswords = SharedPassword::join('users','users.id', '=','shared_passwords.id_owner')
+            ->join('passwords','passwords.id', '=','shared_passwords.id_password')
+            ->join('websites','websites.id', '=','passwords.website_id')
+            ->where('id_receiver',2)->get(['shared_passwords.valid','shared_passwords.id_owner','users.username','shared_passwords.id_password','passwords.password','passwords.login','websites.name as website']);
 
-        /*$sharedPasswords = SharedPassword::addSelect([
-            'owner_login' => User::select('name')->whereColumn('id','shared_passwords.id_owner'),
-            'password' => Password::select('password','login')->whereColumn('id','shared_passwords.id_password')])
-        ->where('id_receiver',2)->get();*/
-        $sharedPasswords = SharedPassword::join('users','users.id', '=','shared_passwords.id_owner')
-        ->join('passwords','passwords.id', '=','shared_passwords.id_password')
-        ->join('websites','websites.id', '=','passwords.website_id')
-        ->where('id_receiver',2)->get(['shared_passwords.valid','shared_passwords.id_owner','users.username','shared_passwords.id_password','passwords.password','passwords.login','websites.name as website']);
+            //dd($sharedPasswords);
 
-        //dd($sharedPasswords);
-
-        return view('dashboard',[
-            "content" => "sharedPasswords",
-            "login" => "User1",
-            "isHmac" => true,
-            'passwordCount' => 2,
-            "passwords" => $sharedPasswords
-        ]);
+            return view('dashboard',[
+                "content" => "sharedPasswords",
+                'passwordCount' => 2,
+                "passwords" => $sharedPasswords
+            ]);
+        } else{
+            //User not logged in
+            return redirect('login');
+        }
     }
 }

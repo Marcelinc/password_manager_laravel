@@ -13,8 +13,8 @@
         <main>
             <section class="userDash">
                 <div class="userInfo">
-                    <h2>Hello {{$login}}</h2>
-                    <p>Account type: <?= $isHmac ? 'HMAC' : 'SHA512'?></p>
+                    <h2>Hello {{auth()->user()->username}}</h2>
+                    <p>Account type: <?= auth()->user()->isPasswordKeptAsHmac ? 'HMAC' : 'SHA512'?></p>
                     <p>Your passwords: {{$passwordCounter}}</p>
                     <x-mode-selector :mode="$mode"/>
                   </div>
