@@ -28,11 +28,13 @@ Route::get('/register', [UserController::class,'create']);
 //Create a new user
 Route::post('/create-user',[UserController::class,'store']);
 
+//Log out user
 Route::post('/logout',[UserController::class,'logout']);
 
-Route::get('/login',function (){
-    return view('login');
-});
+//Show login page
+Route::get('/login',[UserController::class,'login']);
+
+Route::post('/authenticate',[UserController::class,'authenticate']);
 
 
 Route::get('/dashboard',[PasswordController::class,'index']);
