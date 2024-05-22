@@ -1,5 +1,4 @@
 var loginMessage = document.querySelector('#loginMessage');
-var submitLogin = document.querySelector('#submitLogin');
 var loginForm = document.querySelector('#loginForm');
 
 //Error paragraphs
