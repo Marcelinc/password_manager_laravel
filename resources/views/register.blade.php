@@ -13,17 +13,17 @@
                 @csrf
                 <label class="formElem">
                     <p>Login</p>
-                    <input type='text' name="username" value="{{old('username')}}"/>
+                    <input type='text' name="username" value="{{old('username')}}" id="usernameField"/>
                 </label>
                 @error('username')
                     <p class="appMessage" id="usernameRegisterError">{{$message}}</p>
                 @enderror
                 <label class="formElem">
                     <p>Password</p>
-                    <input type='password' name="password" value="{{old('password')}}"/>
+                    <input type='password' name="password" value="{{old('password')}}" id="passwordField"/>
                 </label>
                 @error('password')
-                    <p class="appMessage">{{$message}}</p>
+                    <p class="appMessage" id="passwordRegisterError">{{$message}}</p>
                 @enderror
                 <div class="formRadio">
                     <label>
@@ -36,7 +36,7 @@
                     </label>
                 </div>
                 @error('accountType')
-                        <p class="appMessage">{{$message}}</p>
+                        <p class="appMessage" id="accountTypeError">{{$message}}</p>
                 @enderror
                 <div class="formElem">
                     <input type="submit" class="submit" value="Register" id="submitRegistration"/>
