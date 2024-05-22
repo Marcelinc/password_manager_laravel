@@ -1,18 +1,22 @@
 @extends('layout')
 
 @section('content')
+
+    @push('scripts')
+        <script src="{{ asset('js/register.js') }}" defer></script>
+    @endpush
+
     <main class="formPage">
         <div class="form-container">
             <h1>Create an account</h1>
-            <form method="POST" action="/create-user" class="form">
+            <form method="POST" action="/create-user" class="form" id="registerForm">
                 @csrf
                 <label class="formElem">
                     <p>Login</p>
                     <input type='text' name="username" value="{{old('username')}}"/>
-                    
                 </label>
                 @error('username')
-                    <p class="appMessage">{{$message}}</p>
+                    <p class="appMessage" id="usernameRegisterError">{{$message}}</p>
                 @enderror
                 <label class="formElem">
                     <p>Password</p>
@@ -35,9 +39,9 @@
                         <p class="appMessage">{{$message}}</p>
                 @enderror
                 <div class="formElem">
-                    <input type="submit" class="submit" value="Register"/>
+                    <input type="submit" class="submit" value="Register" id="submitRegistration"/>
                 </div>
-                <p class="appMessage"></p>
+                <p class="appMessage" id="registerMessage"></p>
             </form>
         </div>
     </main>

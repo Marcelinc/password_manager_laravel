@@ -10,6 +10,8 @@ class UserController extends Controller
 {
     //Create a new User form
     public function create(Request $request){
+        if(auth()->check())
+            return redirect('/dashboard');
         return view('register',[
             'type' => $request->type
         ]);
@@ -50,6 +52,8 @@ class UserController extends Controller
 
     //Show login form
     public function login(){
+        if(auth()->check())
+            return redirect('/dashboard');
         return view('login');
     }
 
@@ -65,6 +69,6 @@ class UserController extends Controller
             return redirect('/dashboard');
         }
 
-        return back()->withErrors(['password' => 'Invalid credentials'])->onlyInput('username');
+        return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
     }
 }

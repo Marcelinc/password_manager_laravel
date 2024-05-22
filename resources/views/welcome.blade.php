@@ -18,13 +18,15 @@
                   <p>Choose between two encryption account types: SHA512 and HMAC. </p>
                 </div>
               </section>
-              <section class="accountType">
-                <h2>Create account</h2>
-                <div class="typeSelect">
-                  <a href="/register?type=sha512" class="type sha"><p>SHA512</p></a>
-                  <a href="/register?type=hmac" class="type hmac"><p>HMAC</p></a>
-                </div> 
-              </section>
+              @guest
+                <section class="accountType">
+                  <h2>Create account</h2>
+                  <div class="typeSelect">
+                    <a href="/register?type=sha512" class="type sha"><p>SHA512</p></a>
+                    <a href="/register?type=hmac" class="type hmac"><p>HMAC</p></a>
+                  </div> 
+                </section>
+              @endguest
         </main>
     </div>
 @endsection
