@@ -11,6 +11,14 @@ class LoginAttempt extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'successful',
+        'device',
+        'session',
+        'id_user',
+        'id_address'
+    ];
+
     //Relationship
     public function users(){
         return $this->hasOne(User::class,'id_user');

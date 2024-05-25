@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('successful');
             $table->string('device');
-            $table->string('session');
+            $table->string('session')->nullable();
             $table->foreignId('id_user');
             $table->foreignId('id_address');
             $table->timestamps();

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class IpAddress extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'addressIP',
+        'id_user'
+    ];
 }
