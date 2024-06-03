@@ -42,9 +42,9 @@ class UserController extends Controller
         ]);
 
         //Login
-        auth()->login($user);
+        //auth()->login($user);
 
-        return redirect('/dashboard')->with('message','Account has been created');
+        return redirect('/login')->with('message','Account has been created');
     }
 
     //Logout User
