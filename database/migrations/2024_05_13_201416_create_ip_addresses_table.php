@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('badLoginNum')->default(0);
             $table->integer('lastBadLoginNum')->default(0);
             $table->boolean('permanentLock')->default(0);
-            $table->date('tempLock')->default(date('Y-m-d H:i:s'));
+            $table->dateTime('tempLock')->default(date('Y-m-d H:i:s'));
             $table->string('addressIP');
             $table->foreignId('id_user');
             $table->timestamps();
