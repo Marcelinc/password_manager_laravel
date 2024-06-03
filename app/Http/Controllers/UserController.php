@@ -49,6 +49,13 @@ class UserController extends Controller
 
     //Logout User
     public function logout(Request $request){
+        $clientAddressIP = $request->getClientIp();
+        $userID = auth()->user()->id;
+
+        //Remove 1 from number of logged in instances count
+        $ipAddress = IpAddress::where('addressIP',$clientAddressIP)->where('id_user',$userID)->first();
+        $ipAddress->decrement('okLoginNum');
+
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
