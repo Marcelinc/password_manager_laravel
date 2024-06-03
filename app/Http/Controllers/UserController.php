@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\IpAddress;
+use App\Models\LoginAttempt;
+use Carbon\Carbon;
+use DateInterval;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -64,11 +69,94 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if(auth()->attempt($formFields)){
-            $request->session()->regenerate();
-            return redirect('/dashboard');
+        //login attempt data
+        $clientAddressIP = $request->getClientIp();
+        $clientDevice = $request->header('User-Agent');
+        $user = User::where('username',$request->only('username'))->first();
+        if($user)
+            $userID = $user->id;
+        else
+            return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
+        $ipAddress = IpAddress::where('addressIP',$clientAddressIP)->where('id_user',$userID)->first();
+
+        //Check if user was authenticated with ip address from request
+        if(!$ipAddress){
+            $ipAddress = IpAddress::create([
+                'addressIP' => $clientAddressIP,
+                'id_user' => $userID
+            ]);
         }
 
-        return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
-    }
+        //check if the account has not been permanently locked
+        if(!$ipAddress->permanentLock){
+            $tempLockDateTime = Carbon::create($ipAddress->tempLock,'Europe/Warsaw');
+            $actualDateTime = Carbon::now('Europe/Warsaw');
+            //dd($tempLockDateTime);
+            //check if the account has not been temporarily locked
+            if($tempLockDateTime->lt($actualDateTime)){
+                //Try to authenticate user
+                if(auth()->attempt($formFields)){
+                    //User was authenticated
+
+                    //Generate a new session token
+                    $request->session()->regenerate();
+
+                    //Update login attempt
+                    $ipAddress->increment('okLoginNum');
+                    $ipAddress->lastBadLoginNum = 0;
+                    $ipAddress->tempLock = date_create('now');
+                    $ipAddress->save();
+                    
+                    //Create login attempt
+                    LoginAttempt::create([
+                        'successful' => 1,
+                        'device' => $clientDevice,
+                        'id_user' => $userID,
+                        'id_address' => $ipAddress->id
+                    ]);
+
+                    return redirect('/dashboard');
+
+                } else{
+                    //User was not authenticated
+        
+                    //Update of the attempt count status
+                    $ipAddress->increment('lastBadLoginNum');
+                    $ipAddress->increment('badLoginNum');
+        
+                    //Update temporary lock
+                    if($ipAddress->lastBadLoginNum === 2){
+                        $ipAddress->tempLock = date_create('now',new DateTimeZone('Europe/Warsaw'))->add(new DateInterval('PT15S'));
+                        $ipAddress->save();
+                    }
+                    if($ipAddress->lastBadLoginNum === 3){
+                        $ipAddress->tempLock = date_create('now',new DateTimeZone('Europe/Warsaw'))->add(new DateInterval('PT30S'));
+                        $ipAddress->save();
+                    }
+                    if($ipAddress->lastBadLoginNum === 4){
+                        $ipAddress->tempLock = date_create('now',new DateTimeZone('Europe/Warsaw'))->add(new DateInterval('PT2M'));
+                        $ipAddress->save();
+                    }
+                    if($ipAddress->lastBadLoginNum > 4){
+                        $ipAddress->permanentLock = 1;
+                        $ipAddress->save();
+                    }
+        
+                    //Create login attempt
+                    LoginAttempt::create([
+                        'successful' => 0,
+                        'device' => $clientDevice,
+                        'id_user' => $userID,
+                        'id_address' => $ipAddress->id
+                    ]);
+
+                    return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
+                }
+            } else{
+                return back()->withErrors(['login'=> 'Wait ' . $tempLockDateTime->diffInSeconds($actualDateTime) . ' seconds until next login attempt'])->onlyInput('username')->with('timeLock',$tempLockDateTime->format('Y-m-d H:i:s'));
+            }
+        } else{
+            return back()->withErrors(['login' => 'Your account has been locked because of too many unauthorized login attempts'])->onlyInput('username');
+        }
+    } 
 }
