@@ -3,8 +3,13 @@
 @section('content')
 
     @push('scripts')
+        
         <script src="{{ asset('js/login.js') }}" defer></script>
+        <script>
+            lockDateTime = @json(session('timeLock'));
+        </script>
     @endpush
+
 
     <main class="formPage">
         <section class="form-container">
@@ -26,12 +31,13 @@
                     <p class="appMessage" id="passwordInvalid">{{$message}}</p>
                 @enderror
                 <label class="formElem">
-                    <input type="submit" value="Log in" class="submit" id="submitLogin"/>
+                    <input type="submit" value="Log in" class="submit" id="submitLogin" onclick="updateTempLock"/>
                 </label>
                 @error('login')
                     <p class="appMessage" id="loginResponse">{{$message}}</p>
                 @enderror
-                <p class="appMessage" id="loginMessage"></p>
+                
+                <p class="appMessage" id="loginMessage">{{session('responseMessage') ?? ''}}</p>
             </form>
         </section>
     </main>
