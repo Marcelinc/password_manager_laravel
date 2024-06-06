@@ -44,7 +44,7 @@ class UserController extends Controller
         //Login
         //auth()->login($user);
 
-        return redirect('/login')->with('message','Account has been created');
+        return redirect('/login')->with('responseMessage','Account has been created');
     }
 
     //Logout User
@@ -59,7 +59,7 @@ class UserController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login')->with('message','Logged out');
+        return redirect('/login')->with('responseMessage','Logged out');
     }
 
     //Show login form
@@ -160,7 +160,7 @@ class UserController extends Controller
                     return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
                 }
             } else{
-                return back()->withErrors(['login'=> 'Wait ' . $tempLockDateTime->diffInSeconds($actualDateTime) . ' seconds until next login attempt'])->onlyInput('username')->with('timeLock',$tempLockDateTime->format('Y-m-d H:i:s'));
+                return back()->withErrors(['login'=> 'Wait ' . $tempLockDateTime->diffInSeconds($actualDateTime) . ' seconds until next login attempt'])->with('timeLock',$tempLockDateTime->format('Y-m-d H:i:s'))->onlyInput('username');
             }
         } else{
             return back()->withErrors(['login' => 'Your account has been locked because of too many unauthorized login attempts'])->onlyInput('username');
