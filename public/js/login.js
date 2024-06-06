@@ -70,10 +70,12 @@ const updateTempLock = () => {
 
         //check if account has been temporarily blocked
         if(lockTime.getTime() > actualDateTime.getTime()){
-            //account blocked
-            locked = false;
+            //account login blocked
+            locked = true;
+            //count left time to unlock
+            let secondsToUnlock = Math.round((lockTime.getTime() - actualDateTime.getTime())/1000);
+            loginResponse.innerHTML = `Wait ${secondsToUnlock} seconds until next login attempt`;
         }
-        console.log(actualDateTime,lockTime,'updated');
     }
     return locked;
 }

@@ -24,3 +24,31 @@
     padding-bottom: 60px;
     min-height: 450px;
   }
+
+/*Popup message*/
+#redirectMessage{
+  background-color: #5899c4;
+  border-radius: 1em;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  animation: fadeOut 15s ease-in-out forwards;
+}
+
+/*Animations*/
+@keyframes fadeOut{
+  0%{
+    opacity: .7;
+    transform: translateY(0) translateX(-50%);
+  }
+  20%{
+    opacity: 1;
+    transform: translateY(-10px) translateX(-50%);
+  }
+  100%{
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+    transform: translateY(-10px) translateX(-50%);
+  }
+}

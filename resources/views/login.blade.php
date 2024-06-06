@@ -1,9 +1,10 @@
 @extends('layout')
 
 @section('content')
-
     @push('scripts')
-        
+        @php
+        $response = session('responseMessage');
+        @endphp
         <script src="{{ asset('js/login.js') }}" defer></script>
         <script>
             lockDateTime = @json(session('timeLock'));
@@ -36,8 +37,10 @@
                 @error('login')
                     <p class="appMessage" id="loginResponse">{{$message}}</p>
                 @enderror
-                
-                <p class="appMessage" id="loginMessage">{{session('responseMessage') ?? ''}}</p>
+                <p class="appMessage" id="loginMessage"></p>
+                @if(isset($response))
+                    <p class="appMessage" id="redirectMessage">{{$response}}</p>
+                @endif
             </form>
         </section>
     </main>
