@@ -44,6 +44,10 @@
             @elseif($content === "sharedPasswords")
               <x-shared-password-section :passwords="$passwords"/>
             @endif
+
+            <x-popup>
+              <x-add-password-form/>
+            </x-popup>
         </main>
     </div>
 @endsection

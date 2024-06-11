@@ -14,6 +14,7 @@
     <link href="{{ asset('css/mode-selector.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/password.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
     @stack('scripts')
 </head>
 <body>
