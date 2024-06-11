@@ -1,4 +1,4 @@
-<div class="popup-bg">
+<div {{$attributes->merge(['class' => 'popup-bg'])}}>
     <div class="popup">
         {{$slot}}
     </div>

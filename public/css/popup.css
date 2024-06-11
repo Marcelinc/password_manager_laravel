@@ -15,7 +15,9 @@
     min-width: 300px;
   }
 
-
+.popup-bg.hidden{
+  display: none;
+}
 
 .popup-header{
   text-align: center;

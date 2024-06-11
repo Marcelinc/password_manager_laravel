@@ -9,6 +9,10 @@
 @endphp
 
 @section('content')
+  @push('scripts')
+    <script src="{{ asset('js/dashboard.js') }}" defer></script>
+  @endpush
+
     <div class="content">
         <main>
             <section class="userDash">
@@ -28,7 +32,7 @@
                     <a href="/dashboard/sharedPasswords" class="eventTag" title="Sharing passwords">
                       <x-ri-user-shared-fill />
                     </a>
-                    <a href="#" class='eventTag' title="Add new">
+                    <a href="#" class='eventTag' title="Add new" onclick="toggleAddPasswordPopup()">
                       <x-ri-add-circle-fill />
                     </a>
                     <a href="#" class="{{($mode === 'Read' ? 'disabledBttn ' : '') . 'eventTag'}}" title="Change main password">
@@ -45,7 +49,7 @@
               <x-shared-password-section :passwords="$passwords"/>
             @endif
 
-            <x-popup>
+            <x-popup class="hidden">
               <x-add-password-form/>
             </x-popup>
         </main>

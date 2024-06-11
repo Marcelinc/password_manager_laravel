@@ -21,5 +21,5 @@
     </label>
     <p class='appMessage'></p>
     <button class="submit">Add</button>
-    <button class="submit">Cancel</button>
+    <button type="button" class="submit" onclick="toggleAddPasswordPopup()">Cancel</button>
 </form>
