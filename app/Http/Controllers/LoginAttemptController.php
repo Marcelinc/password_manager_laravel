@@ -12,7 +12,8 @@ class LoginAttemptController extends Controller
         if(auth()->check()){
             //User logged in
             $loginAttempts = LoginAttempt::addSelect(['ip_address' => IpAddress::select('addressIP')
-            ->whereColumn('id','login_attempts.id_address')])->where('id_user',auth()->user()->id)->get();
+            ->whereColumn('id','login_attempts.id_address')])->where('id_user',auth()->user()->id)->
+            orderBy('created_at','desc')->get();
         
             //dd($loginAttempts);
     
