@@ -119,7 +119,8 @@ class UserController extends Controller
                         'successful' => 1,
                         'device' => $clientDevice,
                         'id_user' => $userID,
-                        'id_address' => $ipAddress->id
+                        'id_address' => $ipAddress->id,
+                        'created_at' => date_create('now',new DateTimeZone('Europe/Warsaw'))
                     ]);
 
                     return redirect('/dashboard');
@@ -154,7 +155,8 @@ class UserController extends Controller
                         'successful' => 0,
                         'device' => $clientDevice,
                         'id_user' => $userID,
-                        'id_address' => $ipAddress->id
+                        'id_address' => $ipAddress->id,
+                        'created_at' => date_create('now',new DateTimeZone('Europe/Warsaw'))
                     ]);
 
                     return back()->withErrors(['login' => 'Invalid credentials'])->onlyInput('username');
