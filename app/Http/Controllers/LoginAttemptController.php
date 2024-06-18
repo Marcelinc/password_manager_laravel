@@ -8,6 +8,8 @@ use App\Models\LoginAttempt;
 class LoginAttemptController extends Controller
 {
     //Get all login attempts
+    //@METHOD GET
+    //@ROUTE /dashboard/security
     public function index(){
         if(auth()->check()){
             //User logged in

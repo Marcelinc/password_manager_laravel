@@ -10,6 +10,8 @@ use App\Models\SharedPassword;
 class SharedPasswordController extends Controller
 {
     //Get all shared passwords
+    //@METHOD GET
+    //@ROUTE /dashboard/sharedPasswords
     public function index(){
         if(auth()->check()){
             //User logged in

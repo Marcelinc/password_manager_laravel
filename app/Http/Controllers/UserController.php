@@ -51,20 +51,27 @@ class UserController extends Controller
     public function logout(Request $request){
         $clientAddressIP = $request->getClientIp();
         $userID = auth()->user()->id;
+        $requestUser = $request->user();
 
         //Remove 1 from number of logged in instances count
         $ipAddress = IpAddress::where('addressIP',$clientAddressIP)->where('id_user',$userID)->first();
         $ipAddress->decrement('okLoginNum');
 
+        //Delete bearer token
+        //dd($requestUser);
+        //dd(auth()->user()->tokens());
+        //$request->user()->currentAccessToken()->delete();
+
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/login')->with('responseMessage','Logged out');
     }
 
     //Show login form
     public function login(){
-        if(auth()->check())
+        if(auth()->check()) //check if user has been authenticated
             return redirect('/dashboard');
         return view('login');
     }
@@ -104,9 +111,13 @@ class UserController extends Controller
                 //Try to authenticate user
                 if(auth()->attempt($formFields)){
                     //User was authenticated
+                    $user = auth()->user();
 
                     //Generate a new session token
                     $request->session()->regenerate();
+
+                    //Generate a new bearer token
+                    $token = $user->createToken('apptoken')->plainTextToken;
 
                     //Update login attempt
                     $ipAddress->increment('okLoginNum');
@@ -123,7 +134,7 @@ class UserController extends Controller
                         'created_at' => date_create('now',new DateTimeZone('Europe/Warsaw'))
                     ]);
 
-                    return redirect('/dashboard');
+                    return redirect('/dashboard')->with('token',$token);
 
                 } else{
                     //User was not authenticated

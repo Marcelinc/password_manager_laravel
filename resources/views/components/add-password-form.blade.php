@@ -1,5 +1,12 @@
+@push('scripts')
+    <script>
+        const bearerToken = "{{ session('token') ?? 'No token' }}";
+        console.log('token:', bearerToken);
+    </script>
+@endpush
+
 <h2 class="popup-header">Add password</h2>
-<form action="#" method="POST" class="form passwordForm">
+<form action="/api/password/create" method="POST" class="form passwordForm">
     @csrf
     <label class="formElem">
         <p>Password</p>
@@ -8,7 +15,9 @@
     <label class="formElem">
         <p>Web Address</p>
         <select name="web_address" class='formElem'>
-            <option value="yt">Youtube</option>
+            <option value="1">Youtube</option>
+            <option value="2">Facebook</option>
+            <option value="3">Instagram</option>
         </select>
     </label>
     <label class="formElem">
@@ -17,7 +26,7 @@
     </label>
     <label class="formElem">
         <p>Description (Optional)</p>
-        <input type='text' name="description"/>
+        <input type='text' name="description" maxlength="500"/>
     </label>
     <p class='appMessage'></p>
     <button class="submit">Add</button>
