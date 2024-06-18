@@ -1,8 +1,5 @@
 @push('scripts')
-    <script>
-        const bearerToken = "{{ session('token') ?? 'No token' }}";
-        console.log('token:', bearerToken);
-    </script>
+    
 @endpush
 
 <h2 class="popup-header">Add password</h2>

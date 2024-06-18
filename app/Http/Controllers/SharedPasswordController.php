@@ -22,10 +22,13 @@ class SharedPasswordController extends Controller
 
             //dd($sharedPasswords);
 
+            $bearerToken = auth()->user()->tokens()->where('tokenable_id',auth()->user()->id)->first()->token;
+
             return view('dashboard',[
                 "content" => "sharedPasswords",
                 'passwordCount' => 2,
-                "passwords" => $sharedPasswords
+                "passwords" => $sharedPasswords,
+                "bearer_token" => $bearerToken
             ]);
         } else{
             //User not logged in

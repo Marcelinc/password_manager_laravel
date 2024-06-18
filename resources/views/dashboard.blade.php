@@ -11,6 +11,11 @@
 @section('content')
   @push('scripts')
     <script src="{{ asset('js/dashboard.js') }}" defer></script>
+    <script>
+      const bearerToken = "{{ $bearer_token ?? 'No token' }}";
+      console.log('token:', bearerToken);
+    </script>
+    
   @endpush
 
     <div class="content">

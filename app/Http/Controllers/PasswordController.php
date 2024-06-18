@@ -17,9 +17,13 @@ class PasswordController extends Controller
             $passwords = Password::addSelect(['website' => Website::select('name')
             ->whereColumn('id','passwords.website_id')])->where('user_id',auth()->user()->id)->get();
             //dd($passwords);
+
+            $bearerToken = auth()->user()->tokens()->where('tokenable_id',auth()->user()->id)->first()->token;
+
             return view('dashboard',[
                 "content" => "passwords",
-                "passwords" => $passwords
+                "passwords" => $passwords,
+                "bearer_token" => $bearerToken
             ]);
         } else{
             //User not logged in

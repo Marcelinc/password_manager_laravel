@@ -18,11 +18,14 @@ class LoginAttemptController extends Controller
             orderBy('created_at','desc')->get();
         
             //dd($loginAttempts);
+
+            $bearerToken = auth()->user()->tokens()->where('tokenable_id',auth()->user()->id)->first()->token;
     
             return view('dashboard',[
                 "content" => "security",
                 'passwordCount' => 2,
-                'attempts' => $loginAttempts
+                'attempts' => $loginAttempts,
+                "bearer_token" => $bearerToken
             ]);
         } else{
             //User not logged in

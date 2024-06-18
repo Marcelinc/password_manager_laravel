@@ -51,16 +51,13 @@ class UserController extends Controller
     public function logout(Request $request){
         $clientAddressIP = $request->getClientIp();
         $userID = auth()->user()->id;
-        $requestUser = $request->user();
 
         //Remove 1 from number of logged in instances count
         $ipAddress = IpAddress::where('addressIP',$clientAddressIP)->where('id_user',$userID)->first();
         $ipAddress->decrement('okLoginNum');
 
         //Delete bearer token
-        //dd($requestUser);
-        //dd(auth()->user()->tokens());
-        //$request->user()->currentAccessToken()->delete();
+        $request->user()->tokens()->where('tokenable_id',$request->user()->id)->delete();
 
         auth()->logout();
         $request->session()->invalidate();
@@ -134,7 +131,7 @@ class UserController extends Controller
                         'created_at' => date_create('now',new DateTimeZone('Europe/Warsaw'))
                     ]);
 
-                    return redirect('/dashboard')->with('token',$token);
+                    return redirect('/dashboard')->with('bearer_token',$token);
 
                 } else{
                     //User was not authenticated
